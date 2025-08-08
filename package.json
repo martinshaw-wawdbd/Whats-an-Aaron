@@ -2,9 +2,9 @@
   "name": "whats-an-aaron",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html --public-url /Whats-an-Aaron/",
+    "deploy": "node ./deploy.js"
   },
   "author": "Martin Shaw <martin.shaw@wealthatwork.co.uk>",
   "private": true,
@@ -15,6 +15,7 @@
     "parcel": "^2.15.4"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.15.4"
+    "@parcel/transformer-sass": "^2.15.4",
+    "gh-pages": "^6.3.0"
   }
 }
