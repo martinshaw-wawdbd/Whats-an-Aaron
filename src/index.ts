@@ -6,7 +6,6 @@ import EditorWorker from 'url:monaco-editor/esm/vs/editor/editor.worker.js';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.main.js';
 import { editor } from 'monaco-editor';
 import Color from 'color';
-import { IStandaloneEditorConstructionOptions } from '../node_modules/monaco-editor/monaco.d';
 
 declare global {
     interface Window {
@@ -95,17 +94,12 @@ const exampleScrap = `
 
 `;
 
-const editorElement: HTMLElement|null = document.getElementById('editor');
-if (editorElement == null) throw new Error('There is no editor element')
-
-const editorConfig: IStandaloneEditorConstructionOptions = {
+window.editor = monaco.editor.create(document.getElementById('editor'), {
 	value: exampleScrap,
 	language: 'json',
     theme: "vs-dark",
     automaticLayout: true,
-};
-
-window.editor = monaco.editor.create(editorElement, editorConfig);
+});
 
 const tailwindColorMap = { red: '#e7000b', orange: '#f54a00', amber: '#e17100', yellow: '#d08700', lime: '#5ea500', green: '#00a63e', emerald: '#009966', teal: '#009689', cyan: '#0092b8', sky: '#0084d1', blue: '#155dfc', indigo: '#4f39f6', violet: '#7f22fe', purple: '#9810fa', fuchsia: '#c800de', pink: '#e60076', rose: '#ec003f', slate: '#45556c', gray: '#4a5565', zinc: '#52525c', neutral: '#525252', stone: '#57534d', black: '#000', white: '#fff' } as const;
 const getRealHexFromResult = result => result.indexOf('colors.') === 0 ? tailwindColorMap[result.substring(7)] : result;
